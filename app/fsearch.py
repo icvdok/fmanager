@@ -124,26 +124,63 @@ def fsearch():
                 v_head_type = request.form.get('vf_head_type')
                 v_impronta = request.form.get('vf_impronta')
                 v_materiale = request.form.get('vf_materiale')
-                text_string = f"vite {v_diameter}x{v_length} {tipo_testa.get(v_head_type, 'unknown')}-{tipo_impronta.get(v_impronta, 'unknown')}-{tipo_materiale.get(v_materiale, 'unknown')}"
+                text_string = "vite"
+                if v_diameter:
+                    text_string += f" {v_diameter}"
+                if v_length:
+                    text_string += f"x{v_length}"
+                if v_head_type:
+                    text_string += f" {tipo_testa.get(v_head_type, 'unknown')}"
+                if v_impronta:
+                    text_string += f"-{tipo_impronta.get(v_impronta, 'unknown')}"
+                if v_materiale:
+                    text_string += f"-{tipo_materiale.get(v_materiale, 'unknown')}"
             elif user_input == "Bulloni - Bolt":
                 b_diameter = request.form.get('bf_diameter')
                 b_length = request.form.get('bf_length')
                 b_head_type = request.form.get('bf_head_type')
                 b_impronta = request.form.get('bf_impronta')
                 b_materiale = request.form.get('bf_materiale')
-                text_string = f"bullone {b_diameter}x{b_length} {tipo_testa.get(b_head_type, 'unknown')}-{tipo_impronta.get(b_impronta, 'unknown')}-{tipo_materiale.get(b_materiale, 'unknown')}"
+                text_string = "bullone"
+                if b_diameter:
+                    text_string += f" {b_diameter}"
+                if b_length:
+                    text_string += f"x{b_length}"
+                if b_head_type:
+                    text_string += f" {tipo_testa.get(b_head_type, 'unknown')}"
+                if b_impronta:
+                    text_string += f"-{tipo_impronta.get(b_impronta, 'unknown')}"
+                if b_materiale:
+                    text_string += f"-{tipo_materiale.get(b_materiale, 'unknown')}"
             elif user_input == "Dadi - Nuts":
                 d_diameter = request.form.get('df_diameter')
                 d_tipo_dado = request.form.get('df_tipo_dado')
                 d_materiale = request.form.get('df_materiale')
-                text_string = f"dado {d_diameter} {tipo_dado.get(d_tipo_dado, 'unknown')}-{tipo_materiale.get(d_materiale, 'unknown')}"
+                text_string = "dado"
+                if d_diameter:
+                    text_string += f" {d_diameter}"
+                if d_tipo_dado:
+                    text_string += f" {tipo_dado.get(d_tipo_dado, 'unknown')}"
+                if d_materiale:
+                    text_string += f"-{tipo_materiale.get(d_materiale, 'unknown')}"
+                print("stringa dado:", text_string)
             elif user_input == "Ranelle - Washers":
                 r_internal_diameter = request.form.get('rf_internal_diameter')
                 r_external_diameter = request.form.get('rf_external_diameter')
                 r_thickness = request.form.get('rf_thickness')
                 r_tipo = request.form.get('rf_ranella_type')
                 r_materiale = request.form.get('rf_materiale')
-                text_string = f"ranella {r_internal_diameter}x{r_external_diameter}x{r_thickness} {ranella_tipo.get(r_tipo, 'unknown')}-{tipo_materiale.get(r_materiale, 'unknown')}"
+                text_string = "ranella"
+                if r_internal_diameter:
+                    text_string += f" {r_internal_diameter}"
+                if r_external_diameter:
+                    text_string += f"x{r_external_diameter}"
+                if r_thickness:
+                    text_string += f"x{r_thickness}"
+                if r_tipo:
+                    text_string += f" {ranella_tipo.get(r_tipo, 'unknown')}"
+                if r_materiale:
+                    text_string += f"-{tipo_materiale.get(r_materiale, 'unknown')}"
             else:
                 text_string = "Invalid fastener type"
             
@@ -161,7 +198,7 @@ def fsearch():
                         stock_items = get_stock_location(part['pk'])
                         if stock_items:
                             part_info['stock_locations'] = [
-                                {'location_path': item['location_path'], 'quantity': item['quantity']}
+                                {'location_path': item.get('location_path', 'Unknown location'), 'quantity': item['quantity']}
                                 for item in stock_items
                             ]
                     result.append(part_info)

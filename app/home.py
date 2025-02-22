@@ -36,10 +36,15 @@ def get_all_subcategories(parentid):
 @bp.route('/', methods=['GET', 'POST'])
 def home():
     parentid = 196  # Set parent id where fasteners type are located
-    #subcatlist = get_all_subcategories(parentid)
     fastener_type = get_all_subcategories(parentid)
     current_app.config['FASTENER_TYPE'] = fastener_type
     
     selectionlist = get_all_selection()
     print(f'call functions')
     return render_template('home.html', selectionlist=selectionlist, fastener_type=fastener_type)
+
+if __name__ == '__main__':
+    from flask import Flask
+    app = Flask(__name__)
+    app.register_blueprint(bp)
+    app.run(debug=True)

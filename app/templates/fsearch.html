@@ -21,6 +21,7 @@
         <p></p>
         <label for="vf_length">Length (mm):</label>
         <select name="vf_length" id="vf_length">
+            <option value="" selected disabled>Select length</option>
             {% for key in lunghezza_standard %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -28,6 +29,7 @@
         <p></p>
         <label for="vf_head_type">Head Type:</label>
         <select name="vf_head_type" id="vf_head_type">
+            <option value="" selected disabled>Select head type</option>
             {% for key, value in tipo_testa.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -35,6 +37,7 @@
         <p></p>
         <label for="vf_impronta">Impronta:</label>
         <select name="vf_impronta" id="vf_impronta">
+            <option value="" selected disabled>Select impronta</option>
             {% for key, value in tipo_impronta.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -42,6 +45,7 @@
         <p></p>
         <label for="vf_materiale">Materiale:</label>
         <select name="vf_materiale" id="vf_materiale">
+            <option value="" selected disabled>Select materiale</option>
             {% for key, value in tipo_materiale.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -51,6 +55,7 @@
     <div id="bullone-fields" style="display:none;">
         <label for="bf_diameter">Diametro:</label>
         <select name="bf_diameter" id="bf_diameter">
+            <option value="" selected disabled>Select diameter</option>
             {% for key in diametro_standard %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -58,6 +63,7 @@
         <p></p>
         <label for="bf_length">Length (mm):</label>
         <select name="bf_length" id="bf_length">
+            <option value="" selected disabled>Select length</option>
             {% for key in lunghezza_standard %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -65,6 +71,7 @@
         <p></p>
         <label for="bf_head_type">Head Type:</label>
         <select name="bf_head_type" id="bf_head_type">
+            <option value="" selected disabled>Select head type</option>
             {% for key, value in tipo_testa.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -72,6 +79,7 @@
         <p></p>
         <label for="bf_impronta">Impronta:</label>
         <select name="bf_impronta" id="bf_impronta">
+            <option value="" selected disabled>Select impronta</option>
             {% for key, value in tipo_impronta.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -79,15 +87,16 @@
         <p></p>
         <label for="bf_materiale">Materiale:</label>
         <select name="bf_materiale" id="bf_materiale">
+            <option value="" selected disabled>Select materiale</option>
             {% for key, value in tipo_materiale.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
         </select>
-        <p></p>
     </div>
     <div id="dado-fields" style="display:none;">
         <label for="df_diameter">Diametro:</label>
         <select name="df_diameter" id="df_diameter">
+            <option value="" selected disabled>Select diameter</option>
             {% for key in diametro_standard %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -95,6 +104,7 @@
         <p></p>
         <label for="df_tipo_dado">Tipo Dado:</label>
         <select name="df_tipo_dado" id="df_tipo_dado">
+            <option value="" selected disabled>Select tipo dado</option>
             {% for key, value in tipo_dado.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -102,6 +112,7 @@
         <p></p>
         <label for="df_materiale">Materiale:</label>
         <select name="df_materiale" id="df_materiale">
+            <option value="" selected disabled>Select materiale</option>
             {% for key, value in tipo_materiale.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -120,6 +131,7 @@
         <p></p>
         <label for="rf_ranella_type">Ranella Tipo:</label>
         <select name="rf_ranella_type" id="rf_ranella_type">
+            <option value="" selected disabled>Select ranella tipo</option>
             {% for key, value in ranella_tipo.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -127,6 +139,7 @@
         <p></p>
         <label for="rf_materiale">Materiale:</label>
         <select name="rf_materiale" id="rf_materiale">
+            <option value="" selected disabled>Select materiale</option>
             {% for key, value in tipo_materiale.items() %}
                 <option value="{{ key }}">{{ key }}</option>
             {% endfor %}
@@ -134,6 +147,7 @@
         <p></p>
     </div>
     <button type="submit">Search</button>
+    <button type="button" id="clear-button">Clear</button>
 </form>
 {% if text_string %}
     <p>You are searching for: {{ text_string }}</p>
