@@ -116,27 +116,28 @@ def fsearch():
         fastener_type = current_app.config.get('FASTENER_TYPE', [])
 
         if request.method == 'POST':   
-            user_input = request.form.get('fastener_select')            
-            if user_input == "vite":
+            user_input = request.form.get('fastener_select')
+            print(user_input)           
+            if user_input == "Viti -Screws":
                 v_diameter = request.form.get('vf_diameter')
                 v_length = request.form.get('vf_length')
                 v_head_type = request.form.get('vf_head_type')
                 v_impronta = request.form.get('vf_impronta')
                 v_materiale = request.form.get('vf_materiale')
                 text_string = f"vite {v_diameter}x{v_length} {tipo_testa.get(v_head_type, 'unknown')}-{tipo_impronta.get(v_impronta, 'unknown')}-{tipo_materiale.get(v_materiale, 'unknown')}"
-            elif user_input == "bullone":
+            elif user_input == "Bulloni - Bolt":
                 b_diameter = request.form.get('bf_diameter')
                 b_length = request.form.get('bf_length')
                 b_head_type = request.form.get('bf_head_type')
                 b_impronta = request.form.get('bf_impronta')
                 b_materiale = request.form.get('bf_materiale')
                 text_string = f"bullone {b_diameter}x{b_length} {tipo_testa.get(b_head_type, 'unknown')}-{tipo_impronta.get(b_impronta, 'unknown')}-{tipo_materiale.get(b_materiale, 'unknown')}"
-            elif user_input == "dado":
+            elif user_input == "Dadi - Nuts":
                 d_diameter = request.form.get('df_diameter')
                 d_tipo_dado = request.form.get('df_tipo_dado')
                 d_materiale = request.form.get('df_materiale')
                 text_string = f"dado {d_diameter} {tipo_dado.get(d_tipo_dado, 'unknown')}-{tipo_materiale.get(d_materiale, 'unknown')}"
-            elif user_input == "ranella":
+            elif user_input == "Ranelle - Washers":
                 r_internal_diameter = request.form.get('rf_internal_diameter')
                 r_external_diameter = request.form.get('rf_external_diameter')
                 r_thickness = request.form.get('rf_thickness')
