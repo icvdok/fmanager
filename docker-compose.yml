@@ -8,4 +8,5 @@ services:
       - FLASK_ENV=development
       - INVENTREE_API_TOKEN=${INVENTREE_API_TOKEN}
       - INVENTREE_BASE_URL=${INVENTREE_BASE_URL}
+      - PYTHONUNBUFFERED=1
     command: flask run --host=0.0.0.0 --port=5555

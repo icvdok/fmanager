@@ -4,4 +4,215 @@
 
 {% block content %}
 <h1>This is the FSearch Page.</h1>
+<form method="post">
+    <input type="hidden" name="text_string" id="text_string">
+    <label for="fastener_select">Choose a fastener:</label>
+    <select name="fastener_select" id="fastener_select">
+        <option value="" selected disabled>Select a fastener</option>
+        {% for fastener in fastener_type %}
+            <!-- <option value="{{ fastener }}">{{ fastener }}</option> -->
+            <option value="{{ fastener.name }}">{{ fastener.name }}</option>
+        {% endfor %}
+    </select>
+    <p></p>
+    <div id="vite-fields" style="display:none;">
+        <label for="vf_diameter">Diameter (mm):</label>
+        <input type="text" name="vf_diameter" id="vf_diameter">
+        <p></p>
+        <label for="vf_length">Length (mm):</label>
+        <select name="vf_length" id="vf_length">
+            {% for key in lunghezza_standard %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="vf_head_type">Head Type:</label>
+        <select name="vf_head_type" id="vf_head_type">
+            {% for key, value in tipo_testa.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="vf_impronta">Impronta:</label>
+        <select name="vf_impronta" id="vf_impronta">
+            {% for key, value in tipo_impronta.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="vf_materiale">Materiale:</label>
+        <select name="vf_materiale" id="vf_materiale">
+            {% for key, value in tipo_materiale.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+    </div>
+    <div id="bullone-fields" style="display:none;">
+        <label for="bf_diameter">Diametro:</label>
+        <select name="bf_diameter" id="bf_diameter">
+            {% for key in diametro_standard %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="bf_length">Length (mm):</label>
+        <select name="bf_length" id="bf_length">
+            {% for key in lunghezza_standard %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="bf_head_type">Head Type:</label>
+        <select name="bf_head_type" id="bf_head_type">
+            {% for key, value in tipo_testa.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="bf_impronta">Impronta:</label>
+        <select name="bf_impronta" id="bf_impronta">
+            {% for key, value in tipo_impronta.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="bf_materiale">Materiale:</label>
+        <select name="bf_materiale" id="bf_materiale">
+            {% for key, value in tipo_materiale.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+    </div>
+    <div id="dado-fields" style="display:none;">
+        <label for="df_diameter">Diametro:</label>
+        <select name="df_diameter" id="df_diameter">
+            {% for key in diametro_standard %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="df_tipo_dado">Tipo Dado:</label>
+        <select name="df_tipo_dado" id="df_tipo_dado">
+            {% for key, value in tipo_dado.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="df_materiale">Materiale:</label>
+        <select name="df_materiale" id="df_materiale">
+            {% for key, value in tipo_materiale.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+    </div>
+    <div id="ranella-fields" style="display:none;">
+        <label for="rf_internal_diameter">Internal Diameter (mm):</label>
+        <input type="text" name="rf_internal_diameter" id="rf_internal_diameter">
+        <p></p>
+        <label for="rf_external_diameter">External Diameter (mm):</label>
+        <input type="text" name="rf_external_diameter" id="rf_external_diameter">
+        <p></p>
+        <label for="rf_thickness">Thickness (mm):</label>
+        <input type="text" name="rf_thickness" id="rf_thickness">
+        <p></p>
+        <label for="rf_ranella_type">Ranella Tipo:</label>
+        <select name="rf_ranella_type" id="rf_ranella_type">
+            {% for key, value in ranella_tipo.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        <label for="rf_materiale">Materiale:</label>
+        <select name="rf_materiale" id="rf_materiale">
+            {% for key, value in tipo_materiale.items() %}
+                <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+    </div>
+    <button type="submit">Search</button>
+</form>
+{% if text_string %}
+    <p>You are searching for: {{ text_string }}</p>
+{% endif %}
+
+{% if parts %}
+<p>Search Results:</p>
+<ul>
+    {% for part in parts %}
+        <li>
+            <strong>Part Name:</strong> {{ part.name }}<br>
+            <p></p>
+            <strong>Description:</strong> {{ part.description }}<br>
+            <p></p>
+            {% if part.stock_locations %}
+                <strong>Stock Locations:</strong>
+                <ul>
+                    {% for location in part.stock_locations %}
+                        <li>{{ location.location_path }}: quantity: {{ location.quantity }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if error %}
+    <p>{{ error }}</p>
+{% endif %}
+<script>
+    document.getElementById('fastener_select').addEventListener('change', function() {
+        document.getElementById('vite-fields').style.display = 'none';
+        document.getElementById('bullone-fields').style.display = 'none';
+        document.getElementById('dado-fields').style.display = 'none';
+        document.getElementById('ranella-fields').style.display = 'none';
+        if (this.value === 'vite') {
+            document.getElementById('vite-fields').style.display = 'block';
+        } else if (this.value === 'bullone') {
+            document.getElementById('bullone-fields').style.display = 'block';
+        } else if (this.value === 'dado') {
+            document.getElementById('dado-fields').style.display = 'block';
+        } else if (this.value === 'ranella') {
+            document.getElementById('ranella-fields').style.display = 'block';
+        }
+    });
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const fastenerType = document.getElementById('fastener_select').value;
+        let textString = '';
+
+        if (fastenerType === 'vite') {
+            const diameter = document.getElementById('vf_diameter').value;
+            const length = document.getElementById('vf_length').value;
+            const headType = document.getElementById('vf_head_type').value;
+            const impronta = document.getElementById('vf_impronta').value;
+            const materiale = document.getElementById('vf_materiale').value;
+            textString = `vite ${diameter}x${length} ${headType}-${impronta}-${materiale}`;
+        } else if (fastenerType === 'bullone') {
+            const diameter = document.getElementById('bf_diameter').value;
+            const length = document.getElementById('bf_length').value;
+            const headType = document.getElementById('bf_head_type').value;
+            const impronta = document.getElementById('bf_impronta').value;
+            const materiale = document.getElementById('bf_materiale').value;
+            textString = `bullone ${diameter}x${length} ${headType}-${impronta}-${materiale}`;
+        } else if (fastenerType === 'dado') {
+            const diameter = document.getElementById('df_diameter').value;
+            const tipoDado = document.getElementById('df_tipo_dado').value;
+            const materiale = document.getElementById('df_materiale').value;
+            textString = `dado ${diameter} ${tipoDado}-${materiale}`;
+        } else if (fastenerType === 'ranella') {
+            const internalDiameter = document.getElementById('rf_internal_diameter').value;
+            const externalDiameter = document.getElementById('rf_external_diameter').value;
+            const thickness = document.getElementById('rf_thickness').value;
+            const ranellaType = document.getElementById('rf_ranella_type').value;
+            const materiale = document.getElementById('rf_materiale').value;
+            textString = `ranella ${internalDiameter}x${externalDiameter}x${thickness} ${ranellaType}-${materiale}`;
+        }
+
+        document.getElementById('text_string').value = textString;
+    });
+</script>
 {% endblock %}

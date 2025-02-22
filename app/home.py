@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, current_app
 import requests
 import os
 from dotenv import load_dotenv
@@ -36,6 +36,10 @@ def get_all_subcategories(parentid):
 @bp.route('/', methods=['GET', 'POST'])
 def home():
     parentid = 196  # Set parent id where fasteners type are located
-    subcatlist = get_all_subcategories(parentid)
+    #subcatlist = get_all_subcategories(parentid)
+    fastener_type = get_all_subcategories(parentid)
+    current_app.config['FASTENER_TYPE'] = fastener_type
+    
     selectionlist = get_all_selection()
-    return render_template('home.html', selectionlist=selectionlist, subcatlist=subcatlist)
+    print(f'call functions')
+    return render_template('home.html', selectionlist=selectionlist, fastener_type=fastener_type)
