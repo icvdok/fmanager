@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5555:5555"
+    environment:
+      - FLASK_APP=run.py
+      - INVENTREE_API_TOKEN=${INVENTREE_API_TOKEN}
+      - INVENTREE_BASE_URL=${INVENTREE_BASE_URL}
