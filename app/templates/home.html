@@ -4,4 +4,14 @@
 
 {% block content %}
 <h1>Welcome to the Home Page!</h1>
+<ul>
+    {% for sl in selectionlist %}
+        <li>{{ sl.name }} (ID: {{ sl.pk }})</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% for sc in subcatlist %}
+        <li>{{ sc.name }} (ID: {{ sc.pk }})</li>
+    {% endfor %}
+</ul>
 {% endblock %}
